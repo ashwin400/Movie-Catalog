@@ -1,0 +1,26 @@
+server:
+  port: 9191
+ 
+# eureka:
+#   client:
+#     serviceUrl:
+#       defaultZone: http://localhost:8761/eureka 
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+      - id: MovieCatalogService
+        uri: http://localhost:8067
+        predicates:
+        - Path=/catalog/**
+      - id: MovieInfoService
+        uri: http://localhost:8081
+        predicates:
+        - Path=/movies/**
+      - id: RatingsDataService
+        uri: http://localhost:8082
+        predicates:
+        - Path=/ratingsdata/**
